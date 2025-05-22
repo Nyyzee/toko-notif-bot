@@ -1,16 +1,16 @@
-import telebot
+import requests
 
-# Token bot kamu
-TOKEN = "7942470927:AAFvOCtUk4ZUc6_X26dWV7X08V3OQTvgSN8"
+# Ganti dengan token dan chat_id kamu
+BOT_TOKEN = "7942470927"
+CHAT_ID = "1823303715"
 
-# Inisialisasi bot
-bot = telebot.TeleBot(TOKEN)
+def send_telegram_message(message):
+    url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage"
+    payload = {
+        "chat_id": CHAT_ID,
+        "text": message
+    }
+    requests.post(url, data=payload)
 
-# Fungsi untuk menangani semua pesan
-@bot.message_handler(func=lambda message: True)
-def handle_message(message):
-    bot.reply_to(message, "Halo! Bot @Nyymarket_bot aktif dan siap membantu.")
-
-# Menjalankan bot
-print("Bot @Nyymarket_bot sedang berjalan...")
-bot.infinity_polling()
+# Contoh kirim pesan
+send_telegram_message("Bot notifikasi TokoVoucher aktif!")
